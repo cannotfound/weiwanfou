@@ -14,4 +14,9 @@ public class AudienceConfig {
 	public Audience audience() {
 		return new Audience();
 	}
+	
+	@Bean
+	public AddISayToIPerformance addIToTopShow() {
+		return new AddISayToIPerformance();
+	}
 }

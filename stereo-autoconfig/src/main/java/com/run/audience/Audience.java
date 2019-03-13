@@ -18,8 +18,8 @@ import retry.NeedRetry;
 @Aspect
 public class Audience {
 
-	@Pointcut("execution(* com.run.audience.Say.run(int))")
-	public void aroundPointCut() {
+	@Pointcut("execution(* com.run.audience.Say.run(int)) && args(hnumber)")
+	public void aroundPointCut(int hnumber) {
 	}
 
 	/**
@@ -43,10 +43,10 @@ public class Audience {
 
 	}
 
-	@Around("aroundPointCut()")
-	public Object aroundSay(ProceedingJoinPoint jp) throws InterruptedException {
+	@Around("aroundPointCut(hnumber)")
+	public Object aroundSay(ProceedingJoinPoint jp, int hnumber) throws InterruptedException {
 
-		System.out.println("----start-------");
+		System.out.println("----start-------=" + hnumber);
 
 		MethodSignature ms = (MethodSignature) jp.getSignature();
 		Object arg0 = jp.getArgs()[0];

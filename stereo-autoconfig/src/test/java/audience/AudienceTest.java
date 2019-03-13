@@ -40,11 +40,23 @@ public class AudienceTest {
 	
 		//performance1.perform();
 		//performance2.perform();
-		//performance3.perform();
-		//performance4.perform();
+		performance3.perform();
+		performance4.perform();
+		
+		Say saycell = (Say) performance4;
+		
+		saycell.run(4);
+		
+		Say saycell3 = (Say) performance3;
+		saycell3.run(4);
+		
+		//say.run(2);
+		
+		//say.run(4);
+		
+		//say.run(6);
 		
 		
-		say.run(1);
 		
 		
 		
