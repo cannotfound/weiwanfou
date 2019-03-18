@@ -1,37 +1,143 @@
 package spittr.config;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ITemplateResolver;
 
+/**
+ * 静态资源处理：(待验证)</br>
+ * 如果是WebMvcConfigurationSupport接口，要覆盖两个	 resourceHandlerMapping(),addResourceHandlers()</br>
+ * 如果是WebMvcConfigurerAdapter接口，configureDefaultServletHandling()就可以了。
+ * 
+ * @author only_TG
+ *
+ */
 @Configuration
 @EnableWebMvc
 @ComponentScan("spittr.*")
-public class WebConfig extends WebMvcConfigurerAdapter{
+public class WebConfig extends WebMvcConfigurationSupport {
 
-	@Override
+	/**
+	 * 我们要求DispatcherServlet将对静态资源
+	 * 的请求转发到Servlet容器中默认的Servlet上，而不是使用DispatcherServlet本身来处理 此类请求
+	 * WebMvcConfigurerAdapter接口实现中，这个覆盖就可以了。
+	 */
+	/*@Override
 	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
 		
 		configurer.enable();
-	}
+		
+	}*/
 	
-	@Bean
+	
 	public ViewResolver viewResolver() {
+
 		
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
 		resolver.setExposeContextBeansAsAttributes(true);
+		return resolver;
+	}
+	
+	@Bean
+	public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
+		// ----thymeleaf
+		ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
+		thymeleafViewResolver.setTemplateEngine(templateEngine);
+		return thymeleafViewResolver;
+	}
+
+	/**
+	 * 模板引擎
+	 * @param templateResolver
+	 * @return
+	 */
+	@Bean
+	public SpringTemplateEngine templateEngine(ITemplateResolver templateResolver) {
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setEnableSpringELCompiler(true);
+		templateEngine.setTemplateResolver(templateResolver);
+		return templateEngine;
+	}
+
+	/**
+	 * 模板解析器
+	 * @return
+	 */
+	@Bean
+	public ITemplateResolver templateResolver(){
 		
+		SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+		resolver.setApplicationContext(getApplicationContext());		
+		resolver.setPrefix("/WEB-INF/thymeleafs/");
+		resolver.setSuffix(".html");
+		resolver.setCharacterEncoding("UTF-8");
+		resolver.setTemplateMode(TemplateMode.HTML5);
+		resolver.setCacheable(false);
 		return resolver;
 		
+		
 	}
+	
+	/**
+	 * 静态资源处理
+	 * resourceHandlerMapping()
+	 * addResourceHandlers()
+	 * 在WebMvcConfigurationSupport接口实现两个都必须要
+	 * 
+	 */
+	@Bean
+	public HandlerMapping resourceHandlerMapping() {
+		 
+		return super.resourceHandlerMapping();
+	}
+	
+	/**
+	 * 静态资源处理
+	 * 
+	 */
+	@Override
+	protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+		 
+		
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+	
+	/**
+	 * basename属性可以设置为在 类路径下（以“classpath:”作为前缀） 、文件系统中（以“file:”作为前缀） 或Web应用
+	 * 的根路径下（没有前缀）查找属性
+	 * 
+	 * @return
+	 */
+	@Bean
+	public MessageSource messageSource() {
+
+		ReloadableResourceBundleMessageSource reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
+
+		reloadableResourceBundleMessageSource.setBasename("i18N/cn");
+		reloadableResourceBundleMessageSource.setCacheSeconds(10);
+
+		return reloadableResourceBundleMessageSource;
+	}
+	
+
 
 }

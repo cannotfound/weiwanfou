@@ -8,98 +8,104 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Spitter {
 
-  private Long id;
-  
-  @NotNull
-  @Size(min=5, max=16)
-  private String username;
+	private Long id;
 
-  @NotNull
-  @Size(min=5, max=25)
-  private String password;
-  
-  @NotNull
-  @Size(min=2, max=30)
-  private String firstName;
+	/**
+	 * 。如果没有大括号的话，message中的值将会作为展现给用户的错误信 息。
+	 * 但是使用了大括号之后，我们使用的就是属性文件中的某一个属性，该属性包含了实际
+	 * 的信息。
+	 */
+	@NotNull
+	@Size(min = 5, max = 16, message = "{username.size}")
+	private String username;
 
-  @NotNull
-  @Size(min=2, max=30)
-  private String lastName;
-  
-  @NotNull
-  private String email;
+	@NotNull
+	@Size(min = 5, max = 25, message = "{password.size}")
+	private String password;
 
-  public Spitter() {}
-  
-  public Spitter(String username, String password, String firstName, String lastName, String email) {
-    this(null, username, password, firstName, lastName, email);
-  }
+	@NotNull
+	@Size(min = 2, max = 30, message = "{firstName.size}")
+	private String firstName;
 
-  public Spitter(Long id, String username, String password, String firstName, String lastName, String email) {
-    this.id = id;
-    this.username = username;
-    this.password = password;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-  }
+	@NotNull
+	@Size(min = 2, max = 30, message = "{lastName.size}")
+	private String lastName;
 
-  public String getUsername() {
-    return username;
-  }
+	@NotNull
+	private String email;
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+	public Spitter() {
+	}
 
-  public String getPassword() {
-    return password;
-  }
+	public Spitter(String username, String password, String firstName, String lastName, String email) {
+		this(null, username, password, firstName, lastName, email);
+	}
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	public Spitter(Long id, String username, String password, String firstName, String lastName, String email) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
 
-  public Long getId() {
-    return id;
-  }
+	public String getUsername() {
+		return username;
+	}
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-  public String getFirstName() {
-    return firstName;
-  }
+	public String getPassword() {
+		return password;
+	}
 
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-  public String getLastName() {
-    return lastName;
-  }
+	public Long getId() {
+		return id;
+	}
 
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-  
-  public String getEmail() {
-    return email;
-  }
-  
-  public void setEmail(String email) {
-    this.email = email;
-  }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  @Override
-  public boolean equals(Object that) {
-    return EqualsBuilder.reflectionEquals(this, that, "firstName", "lastName", "username", "password", "email");
-  }
-  
-  @Override
-  public int hashCode() {
-    return HashCodeBuilder.reflectionHashCode(this, "firstName", "lastName", "username", "password", "email");
-  }
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public boolean equals(Object that) {
+		return EqualsBuilder.reflectionEquals(this, that, "firstName", "lastName", "username", "password", "email");
+	}
+
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this, "firstName", "lastName", "username", "password", "email");
+	}
 
 }
