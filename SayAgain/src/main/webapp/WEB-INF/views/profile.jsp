@@ -3,7 +3,8 @@
 <%@ page isELIgnored="false"%>
 <html>
   <head>
-    <title>Spitter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Spitter ma</title>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/style.css" />" >
   </head>
   <body>
