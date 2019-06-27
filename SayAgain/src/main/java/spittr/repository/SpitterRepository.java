@@ -4,7 +4,17 @@ import spittr.pojo.Spitter;
 
 public interface SpitterRepository {
 
-	  Spitter save(Spitter spitter);
+	  void save(Spitter spitter);
 	  
 	  Spitter findByUsername(String username);
+	  
+	  Spitter getById(Long id);
+	  
+	  Spitter findById(Long id);
+	  
+	  void updateById(Long id);
+	  
+	  void addAcc(Long id, int num);
+	  
+	  void subAcc(Long id, int num);
 }

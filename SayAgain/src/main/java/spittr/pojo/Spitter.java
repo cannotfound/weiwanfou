@@ -1,13 +1,24 @@
 package spittr.pojo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+@Entity
+@Table(name="hao_spitter")
 public class Spitter {
 
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	/**
@@ -17,21 +28,30 @@ public class Spitter {
 	 */
 	@NotNull
 	@Size(min = 5, max = 16, message = "{username.size}")
+	@Column(name = "username")
 	private String username;
 
 	@NotNull
+	@Column(name = "acc", columnDefinition="int default 0")
+	private int acc;
+	
+	@NotNull
 	@Size(min = 5, max = 25, message = "{password.size}")
+	@Column(name = "password")
 	private String password;
 
 	@NotNull
 	@Size(min = 2, max = 30, message = "{firstName.size}")
+	@Column(name = "firstName")
 	private String firstName;
 
 	@NotNull
 	@Size(min = 2, max = 30, message = "{lastName.size}")
+	@Column(name = "lastName")
 	private String lastName;
 
 	@NotNull
+	@Column(name = "email")
 	private String email;
 
 	public Spitter() {
@@ -106,6 +126,14 @@ public class Spitter {
 	@Override
 	public int hashCode() {
 		return HashCodeBuilder.reflectionHashCode(this, "firstName", "lastName", "username", "password", "email");
+	}
+
+	public int getAcc() {
+		return acc;
+	}
+
+	public void setAcc(int acc) {
+		this.acc = acc;
 	}
 
 }

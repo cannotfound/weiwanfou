@@ -6,13 +6,16 @@ import javax.persistence.Basic;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -59,6 +62,10 @@ import spittr.interceptor.AuthInterceptor;
 public class WebConfig extends WebMvcConfigurationSupport {
 
 	Logger logger = LoggerFactory.getLogger(WebConfig.class);
+	
+	
+	@Autowired
+	private SessionFactory sessionFactory;
 	
 	/**
 	 * 我们要求DispatcherServlet将对静态资源

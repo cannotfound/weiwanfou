@@ -2,6 +2,7 @@ package spittr.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -29,6 +30,7 @@ import spittr.exception.HandsomeNotFoundException;
 import spittr.exception.MoneyNotFoundException;
 import spittr.pojo.Spitter;
 import spittr.repository.SpitterRepository;
+import spittr.repository.SpitterRepositoryImpl;
 
 @Controller
 @RequestMapping("/spitter")
@@ -42,6 +44,9 @@ public class SpitterController {
 
 	}
 
+	@Autowired
+	private SpitterRepositoryImpl spitterRepositoryImpl;
+	
 	@Autowired
 	public SpitterController(SpitterRepository spitterRepository) {
 		this.spitterRepository = spitterRepository;
@@ -131,7 +136,23 @@ public class SpitterController {
 
 			Spitter spitter = spitterRepository.findByUsername(username);
 			model.addAttribute(spitter);
+
 			logger.error("showSpitterProfile()  model中没有 spitter, 用Repository查找出来----");
+			
+			
+			/**
+			 * 利用spring事务管理，把sub,add两个动作整成完整一个事务。配置见applicationContext.xml
+			 */
+			System.out.println("-------start acc--------");
+			spitterRepository.subAcc((long) 10, 20);
+			
+			int i = 0;
+			int j = 1;
+			int c = j / i;
+			
+			spitterRepository.addAcc((long) 9, 20);
+			System.out.println("-------end acc--------");			
+			
 		}else {
 		
 			logger.error("showSpitterProfile()  model中有 spitter, 直接展现--------");
@@ -139,5 +160,5 @@ public class SpitterController {
 		
 		return "profile";
 	}
-
+	
 }
