@@ -1,5 +1,7 @@
 package spittr.pojo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,12 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @Entity
 @Table(name="hao_spitter")
-public class Spitter {
+public class Spitter implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1101L;
 
 	@Id
 	@Column(name = "id")

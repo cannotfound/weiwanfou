@@ -8,6 +8,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.stereotype.Repository;
@@ -48,6 +50,7 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 	}
 	
 	@Override
+	@CachePut(value="haolihai", key="'cache_JackMa'")
 	public Spitter findById(Long id) {
 		
 		Spitter cell = (Spitter) this.getSession().get(Spitter.class, id);
@@ -69,9 +72,10 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 	
 
 	@Override
+	@Cacheable(value="haolihai", key="'cache_'+#username")
 	public Spitter findByUsername(String username) {
 		
-		
+		System.out.println("--------   来数据库查了---  ");
 		
 		String sql = "select title from hao_user where id=?";
 		

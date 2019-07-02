@@ -12,7 +12,8 @@ import org.bouncycastle.math.raw.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -146,9 +147,7 @@ public class SpitterController {
 			System.out.println("-------start acc--------");
 			spitterRepository.subAcc((long) 10, 20);
 			
-			int i = 0;
-			int j = 1;
-			int c = j / i;
+
 			
 			spitterRepository.addAcc((long) 9, 20);
 			System.out.println("-------end acc--------");			
@@ -160,5 +159,18 @@ public class SpitterController {
 		
 		return "profile";
 	}
+	
+	@RequestMapping(value = "/jackcache", method = RequestMethod.GET)
+	public String jackMaSaveToCache(Model model) {
+		
+		Spitter cell = spitterRepository.findById(10L);
+		
+		
+		model.addAttribute(cell);
+		
+		return "profile";
+		
+	}
+	
 	
 }
