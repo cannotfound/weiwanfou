@@ -172,5 +172,15 @@ public class SpitterController {
 		
 	}
 	
+	@RequestMapping(value = "/byid/{id}", method = RequestMethod.GET)
+	public String showSpitterById(@PathVariable Long id, Model model) {
+		
+		Spitter temp = spitterRepository.findById(id);
+		
+		model.addAttribute(temp);
+		
+		return "profile";
+	}
+	
 	
 }

@@ -49,11 +49,22 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 		return cell;
 	}
 	
+	/**
+	 * Spitter 属性acc小于0的，不会被缓存
+	 * id>=5才会被缓存，
+	 * unless属性只有在缓存方法有返回值时才开始发挥作用。而condition
+	 * 肩负着在方法上禁用缓存的任务，因此它不能等到方法返回时再确定是否该关闭缓存。这意
+	 * 味着它的表达式必须要在进入方法时进行计算，所以我们不能通过#result引用返回值
+	 */
 	@Override
-	@CachePut(value="haolihai", key="'cache_JackMa'")
+	@Cacheable(value="haolihai", key="'spitter_'+#id", unless="#result.acc<0", condition="#id>=5")
 	public Spitter findById(Long id) {
 		
+		
+		System.out.println("--------   来数据库查了-----  ");
+		
 		Spitter cell = (Spitter) this.getSession().get(Spitter.class, id);
+		
 		return cell;
 	}
 	
