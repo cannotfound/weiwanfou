@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/resources/ValidationMessages.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/thymeleafs/login.html=UTF-8
 encoding//src/main/webapp/WEB-INF/views/registerFormValid.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/spittle.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/spittles.jsp=UTF-8

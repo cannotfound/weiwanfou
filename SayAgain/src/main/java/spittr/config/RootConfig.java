@@ -17,7 +17,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @ComponentScan(basePackages= {"spittr"}, excludeFilters= {@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@ImportResource("classpath*:applicationContext.xml")
+//@ImportResource("classpath*:applicationContext.xml")
+@Import({DataConfig.class})
 public class RootConfig {
 
 }

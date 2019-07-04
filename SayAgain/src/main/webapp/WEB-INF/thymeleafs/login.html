@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:include="header_meta">
+</head>
+
+
+<body>
+
+
+  
+<div>
+
+<form id="loginForm" method="POST">
+<ul>
+
+<li>帐号：<input type="text" id="username" name="username"/></li>
+<li>密码：<input type="password" id="password" name="password"/></li>
+
+<li><span th:text="${errorMsg}"></span></li>
+</ul>
+</form>
+
+
+<div>
+<li><input type="button" value="登陆" id="loginBtn"/></li>
+</div>
+
+</div>
+
+<script>
+
+$(function(){
+	
+	$('#loginBtn').click(function(){
+		
+		//alert("login");
+		
+		$('#loginForm').submit();
+		
+	});
+	
+	
+});
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

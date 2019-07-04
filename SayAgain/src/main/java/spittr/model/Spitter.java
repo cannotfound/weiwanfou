@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="hao_user")
+@Table(name="spitter_user")
 public class Spitter {
 
 	@Id

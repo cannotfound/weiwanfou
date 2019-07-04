@@ -86,7 +86,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB-INF/views/");
 		resolver.setSuffix(".jsp");
-		resolver.setExposeContextBeansAsAttributes(true);
+		resolver.setExposeContextBeansAsAttributes(true);//使得可以在JSP页面中通过${ }*访问容器中的bean。
 		return resolver;
 	}
 	
@@ -211,7 +211,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		
 		logger.error("--------addInterceptors--------");
 		
-		registry.addInterceptor(authInterceptor());//.addPathPatterns("/**");
+		registry.addInterceptor(authInterceptor()).excludePathPatterns("/login");//.addPathPatterns("/**");
 		
 		
 		 

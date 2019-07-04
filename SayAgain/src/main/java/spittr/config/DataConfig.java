@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
 
 
 public class DataConfig {
@@ -40,7 +41,7 @@ public class DataConfig {
 	public JndiObjectFactoryBean jndiObjectFactoryBean() throws NamingException {
 		
 		JndiObjectFactoryBean jb = new JndiObjectFactoryBean();
-		jb.setJndiName("mayDS");
+		jb.setJndiName("jdbc/mayDS");
 		jb.setResourceRef(true);
 		jb.setProxyInterface(javax.sql.DataSource.class);
 		
@@ -99,5 +100,9 @@ public class DataConfig {
 		return tm;
 	}
 	
+	@Bean
+	public SessionFactory sessionFactory() {
+		return new HibernateJpaSessionFactoryBean();
+	}
 
 }
