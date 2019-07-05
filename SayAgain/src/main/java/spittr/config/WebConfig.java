@@ -64,8 +64,6 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	Logger logger = LoggerFactory.getLogger(WebConfig.class);
 	
 	
-	@Autowired
-	private SessionFactory sessionFactory;
 	
 	/**
 	 * 我们要求DispatcherServlet将对静态资源
@@ -95,6 +93,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 		// ----thymeleaf
 		ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
 		thymeleafViewResolver.setTemplateEngine(templateEngine);
+		thymeleafViewResolver.setCharacterEncoding("UTF-8");
 		return thymeleafViewResolver;
 	}
 
@@ -168,6 +167,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
 
 		reloadableResourceBundleMessageSource.setBasename("i18N/cn");
 		reloadableResourceBundleMessageSource.setCacheSeconds(10);
+		reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
 
 		return reloadableResourceBundleMessageSource;
 	}

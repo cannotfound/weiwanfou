@@ -19,7 +19,7 @@ import spittr.pojo.SpitterUser;
 
 @Controller
 @RequestMapping({ "/", "/homepage" })
-public class HomeController {
+public class HomeController{
 
 	Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -38,7 +38,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login2(Model model, @Valid SpitterUser user, Errors error) {
+	public String login2(Model model, HttpSession session, @Valid SpitterUser user, Errors error) {
 
 		//HttpSession session = request.getSession();
 		
@@ -47,8 +47,9 @@ public class HomeController {
 
 		if(username.equals("admin") && password.equals("admin")) {
 			
-			//session.setAttribute("user", 1);
-			return "redirect:home";
+			session.setAttribute("user", user);
+			
+			return "redirect:homepage";
 		}
 		
 		model.addAttribute("errorMsg", "用户名或者密码错。");

@@ -17,8 +17,10 @@ import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaSessionFactoryBean;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
+@EnableTransactionManagement(proxyTargetClass=true)
 public class DataConfig {
 	
 	/*
@@ -57,13 +59,13 @@ public class DataConfig {
 	}
 
 	
-	@Bean
+	
 	public JdbcOperations jdbcTemplate(DataSource ds) {
 		return new JdbcTemplate(ds);
 	}
 	
 	@Bean
-	public LocalSessionFactoryBean sessionFactoryBean(DataSource dataSource) {
+	public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
 		
 		LocalSessionFactoryBean sb = new LocalSessionFactoryBean();
 		
@@ -97,12 +99,8 @@ public class DataConfig {
 		
 		HibernateTransactionManager tm = new HibernateTransactionManager(sessionFactory);
 		
+		
 		return tm;
-	}
-	
-	@Bean
-	public SessionFactory sessionFactory() {
-		return new HibernateJpaSessionFactoryBean();
 	}
 
 }

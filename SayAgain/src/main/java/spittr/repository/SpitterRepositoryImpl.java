@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import spittr.pojo.Spitter;
 
 @Repository
+@Transactional
 public class SpitterRepositoryImpl implements SpitterRepository {
 
 	//private JdbcOperations jdbcOperations;
