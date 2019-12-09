@@ -62,7 +62,7 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 	public Spitter findById(Long id) {
 		
 		
-		System.out.println("--------   来数据库查了-----  ");
+		System.out.println("--------   来数据库查了-----  id=" + id);
 		
 		Spitter cell = (Spitter) this.getSession().get(Spitter.class, id);
 		

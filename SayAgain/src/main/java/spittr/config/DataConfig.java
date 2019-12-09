@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement(proxyTargetClass=true)
 public class DataConfig {
 	
-	/*
+	
 	@Bean
 	public DataSource dataSource() {
 		
@@ -36,9 +36,9 @@ public class DataConfig {
 		
 		return ds;
 	}
-	*/
 	
 	
+	/*
 	@Bean
 	public JndiObjectFactoryBean jndiObjectFactoryBean() throws NamingException {
 		
@@ -52,11 +52,11 @@ public class DataConfig {
 		/*Context initContext = new InitialContext();
 		Context envContext = (Context)initContext.lookup("java:/comp/env");
 		DataSource ds = (DataSource)envContext.lookup("jdbc/mayDS");
-		return ds;*/
+		return ds;///
 		
 		//return (DataSource) jb.getObject();
 		
-	}
+	}*/
 
 	
 	

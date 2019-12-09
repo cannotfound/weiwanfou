@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
 
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.bouncycastle.math.raw.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -131,6 +133,8 @@ public class SpitterController {
 	}
 
 	@RequestMapping(value = "/{username}", method = RequestMethod.GET)
+	//@RequiresPermissions("admin")
+	@RequiresRoles("admin")
 	public String showSpitterProfile(@PathVariable String username, Model model) {
 
 		if (!model.containsAttribute("spitter")) {

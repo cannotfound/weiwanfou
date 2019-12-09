@@ -14,7 +14,7 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，
 value=“/logs” – 表示保存到系统目录 ，所在分区根目录？？
 value=“../logs” – 表示保存到项目的父目录
      -->
-    <property name="LOG_HOME" value="logs-say" />
+    <property name="LOG_HOME" value="../logs-say" />
     <!-- 定义日志文件名称 -->
     <property name="appName" value="SayAgain"></property>
     <!-- ch.qos.logback.core.ConsoleAppender 表示控制台输出 -->

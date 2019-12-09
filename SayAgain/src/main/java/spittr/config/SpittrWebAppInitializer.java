@@ -2,10 +2,13 @@ package spittr.config;
 
 import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import ch.qos.logback.ext.spring.web.LogbackConfigListener;
 
 public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -36,22 +39,6 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		registration.setMultipartConfig(new MultipartConfigElement("/uploads", 2097152, 4194304, 0));
 	}
 
-//	@Override
-//	public void onStartup(ServletContext servletContext) throws ServletException {
-//		
-//		FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encodingFilter",
-//				CharacterEncodingFilter.class);
-//		encodingFilter.setInitParameter("encodingFilter", String.valueOf(StandardCharsets.UTF_8));
-//		encodingFilter.setInitParameter("forceEncoding", "true");
-//		encodingFilter.addMappingForUrlPatterns(null, false, "/*");
-//		
-//		
-//		servletContext.addFilter("encodingFilter2", EncodingFilter.class);
-//		
-//		
-//		super.onStartup(servletContext);
-//	}
-
 	@Override
 	protected Filter[] getServletFilters() {
 		
@@ -62,7 +49,6 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 		
 		return new Filter[] { characterEncodingFilter };
 	}
-
-
-
+	
+	
 }

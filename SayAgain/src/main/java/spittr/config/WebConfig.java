@@ -209,9 +209,9 @@ public class WebConfig extends WebMvcConfigurationSupport {
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		
-		logger.error("--------addInterceptors--------");
+		//logger.error("--------addInterceptors--------");
 		
-		registry.addInterceptor(authInterceptor()).excludePathPatterns("/login");//.addPathPatterns("/**");
+		//registry.addInterceptor(authInterceptor()).excludePathPatterns("/login");//.addPathPatterns("/**");
 		
 		
 		 

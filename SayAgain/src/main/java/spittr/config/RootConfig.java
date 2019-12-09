@@ -12,13 +12,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 /**
  * 我加的呵呵
  * @author hel
- *
+ * 数据源配置applicationContext 和DataConfig任选一
  */
 @Configuration
 @ComponentScan(basePackages= {"spittr"}, excludeFilters= {@Filter(type=FilterType.ANNOTATION, value=EnableWebMvc.class)})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-//@ImportResource("classpath*:applicationContext.xml")
-@Import({DataConfig.class})
+@ImportResource("classpath*:applicationContext.xml")
+@Import({ DataConfig.class, RabbitMQConfig.class })
 public class RootConfig {
 
 }
